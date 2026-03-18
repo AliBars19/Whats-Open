@@ -123,12 +123,12 @@ function formatTimeShort(time24: string): string {
   return `${displayHour}:${minute}${period.toLowerCase()}`;
 }
 
-export function isOpenNow(openingHours: OpeningHours): OpenStatus {
+export function isOpenNow(openingHours: OpeningHours, testNow?: Date): OpenStatus {
   if (!openingHours || Object.keys(openingHours).length === 0) {
     return { isOpen: false, closesAt: null, opensAt: null, status: "unknown" };
   }
 
-  const now = getLondonTime();
+  const now = testNow || getLondonTime();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
   const today = getDayName(now);
   const todayHours = openingHours[today];
