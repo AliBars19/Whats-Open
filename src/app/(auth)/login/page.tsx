@@ -25,7 +25,7 @@ export default function LoginPage() {
     });
 
     if (error) {
-      showToast(error.message, "error");
+      showToast("Something went wrong. Please try again.", "error");
     } else {
       setSent(true);
     }

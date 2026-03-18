@@ -85,6 +85,21 @@ export function AddPlaceForm() {
 
   const handleSubmit = async () => {
     if (!user || !location) return;
+
+    // Validate website URL protocol
+    if (websiteUrl) {
+      try {
+        const parsed = new URL(websiteUrl);
+        if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+          showToast("Website URL must start with http:// or https://", "error");
+          return;
+        }
+      } catch {
+        showToast("Invalid website URL", "error");
+        return;
+      }
+    }
+
     setLoading(true);
 
     const { data, error } = await supabase
